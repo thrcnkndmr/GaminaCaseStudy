@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class BallsManager : MonoBehaviour
 {
-    public Transform ballsParent;
-    public Transform ballsSpawnPoint;
     private Pool pool;
     private TouchManager _touchManager;
-    private bool isGameStarted = true;
+    
+    public Transform ballsParent;
+    public Transform ballsSpawnPoint;
+    
+    public int ballCount = 10;
+    public Transform ballParent;
+    public int levelPassCount = 5;
+  
+    private bool isGameNotStarted = true;
 
 
     private void Awake()
@@ -30,7 +36,7 @@ public class BallsManager : MonoBehaviour
 
     private void OnTouchBegan(TouchInput touchInput)
     {
-        if (isGameStarted)
+        if (isGameNotStarted)
         {
             StartSpawn(30);
         }
@@ -44,7 +50,7 @@ public class BallsManager : MonoBehaviour
             pool.SpawnObject(ballsSpawnPoint.position, "Ball", ballsParent);
         }
         
-        isGameStarted = false;
+        isGameNotStarted = false;
     }
 }
 

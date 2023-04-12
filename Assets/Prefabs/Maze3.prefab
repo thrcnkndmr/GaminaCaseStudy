@@ -2887,7 +2887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 531019939110925778}
   m_Layer: 0
-  m_Name: Maze_10
+  m_Name: Maze3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
