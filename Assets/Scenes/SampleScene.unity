@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 510853953}
   - component: {fileID: 510853955}
   - component: {fileID: 510853957}
+  - component: {fileID: 510853958}
   - component: {fileID: 510853956}
   m_Layer: 0
   m_Name: Managers
@@ -263,10 +264,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 510853957}
   ballsManager: {fileID: 510853955}
-  environmentRandomizer: {fileID: 11400000, guid: f2d8aebb3f27a4f4080e8ec187fdd95a, type: 2}
+  levelManager: {fileID: 510853958}
   pool: {fileID: 510853956}
+  environmentRandomizer: {fileID: 11400000, guid: f2d8aebb3f27a4f4080e8ec187fdd95a, type: 2}
   currentMaze: {fileID: 0}
   mazeSpawn: {fileID: 1888681749}
+  isGameNotStarted: 1
+  levelPassCount: 5
+  ballCount: 10
+  ballsInHole: 0
 --- !u!114 &510853955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,9 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballsParent: {fileID: 46742986}
   ballsSpawnPoint: {fileID: 163044566}
-  ballCount: 10
-  ballParent: {fileID: 46742986}
-  levelPassCount: 5
 --- !u!114 &510853956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +317,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8283136285409864ba9c11b181119feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &510853958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510853950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efaa80037d95e6429611b4f326ba744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNumber: 1
+  currentLevel: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +551,10 @@ PrefabInstance:
     - target: {fileID: 2568309249483675082, guid: 35560838ad8cb6343b77ed8f50c86051, type: 3}
       propertyPath: m_Name
       value: Cup
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568309249483675082, guid: 35560838ad8cb6343b77ed8f50c86051, type: 3}
+      propertyPath: m_TagString
+      value: Hole
       objectReference: {fileID: 0}
     - target: {fileID: 2949759947482812272, guid: 35560838ad8cb6343b77ed8f50c86051, type: 3}
       propertyPath: m_RootOrder

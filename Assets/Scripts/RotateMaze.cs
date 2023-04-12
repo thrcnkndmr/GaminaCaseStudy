@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Blended;
 using UnityEngine;
 
@@ -26,5 +23,4 @@ public class RotateMaze : MonoBehaviour
         float rotationAmount = mouseX * sensitivity;
         transform.Rotate(Vector3.back, rotationAmount);
     }
-    
 }
