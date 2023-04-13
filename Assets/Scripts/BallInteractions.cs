@@ -1,10 +1,11 @@
-using System;
 using Blended;
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 public class BallInteractions : MonoBehaviour
 {
     private GameManager _gameManager;
+    public ParticleSystem ballParticle;
 
     private void Awake()
     {
@@ -15,8 +16,7 @@ public class BallInteractions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-            GetComponent<ConstrainToCollider>().enabled = true;
-            GetComponent<BallInteractions>().transform.SetParent(Pool.Instance.poolObjects[0].transform);
+           transform.SetParent(Pool.Instance.poolObjects[0].transform);
         }
         else if (other.gameObject.CompareTag("DroppingCollider"))
         {
@@ -28,8 +28,15 @@ public class BallInteractions : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hole"))
         {
-            Destroy(gameObject);
             _gameManager.BallInHole();
+            ballParticle.Play();
+            ballParticle.GetComponent<AudioSource>().Play();
+            MMVibrationManager.Haptic(HapticTypes.MediumImpact);
+
+            //Destroy(gameObject);
+            
+            
         }
     }
+    
 }

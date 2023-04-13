@@ -8,6 +8,8 @@ TagManager:
   - Ball
   - Hole
   - DroppingCollider
+  - Missile
+  - ballsParticle
   layers:
   - Default
   - TransparentFX
