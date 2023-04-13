@@ -16,27 +16,26 @@ public class BallInteractions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Finish"))
         {
-           transform.SetParent(Pool.Instance.poolObjects[0].transform);
+            transform.SetParent(Pool.Instance.poolObjects[0].transform);
         }
         else if (other.gameObject.CompareTag("DroppingCollider"))
         {
             _gameManager.DroppingBallsCounter();
         }
-        
+      
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Hole"))
         {
-            _gameManager.BallInHole();
             ballParticle.Play();
             ballParticle.GetComponent<AudioSource>().Play();
+            _gameManager.BallInHole();
             MMVibrationManager.Haptic(HapticTypes.MediumImpact);
-
-            //Destroy(gameObject);
-            
             
         }
     }
-    
+
+ 
 }
