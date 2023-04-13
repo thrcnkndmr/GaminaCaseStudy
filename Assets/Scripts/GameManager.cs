@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
     public bool isGameNotStarted = true;
     public int levelPassCount = 5;
     public int ballCount = 10;
+    private int droppingBallsAmount;
     public int ballsInHole;
 
     private void OnEnable()
@@ -36,6 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (isGameNotStarted)
         {
+            uiManager.HideTapToStart();
             ballsManager.StartSpawn(ballCount);
         }
 
@@ -54,25 +56,35 @@ public class GameManager : MonoSingleton<GameManager>
         Instantiate(currentMaze, mazeSpawn.position, Quaternion.identity,mazeSpawn);
     }
 
+    public void DroppingBallsCounter()
+    {
+        droppingBallsAmount++;
+        Debug.Log(droppingBallsAmount);
+    }
 
     public void BallInHole()
     {
         ballsInHole++;
+        uiManager.UpdateUI();
+
+        if (droppingBallsAmount == ballCount)
+        {
+            if (ballsInHole >= levelPassCount)
+            {
+                ballCount += 5;
+                levelPassCount += 5;
+                ballsInHole = 0;
+                levelManager.NextLevel();
+                PlayerPrefs.SetInt("Level", levelManager.currentLevel);
+                PlayerPrefs.SetInt("BallsCount", ballCount);
+                PlayerPrefs.SetInt("BallsNeededToPassLevel", levelPassCount);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                levelManager.RestartLevel();
+            }
+        }
         
-        if (ballsInHole >= levelPassCount)
-        {
-            ballCount += 5;
-            levelPassCount += 5;
-            ballsInHole = 0;
-            levelManager.NextLevel();
-            PlayerPrefs.SetInt("Level", levelManager.currentLevel);
-            PlayerPrefs.SetInt("BallsCount", ballCount);
-            PlayerPrefs.SetInt("BallsNeededToPassLevel", levelPassCount);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        else
-        {
-            levelManager.RestartLevel();
-        }
     }
 }

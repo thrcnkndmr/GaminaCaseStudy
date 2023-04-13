@@ -18,6 +18,11 @@ public class BallInteractions : MonoBehaviour
             GetComponent<ConstrainToCollider>().enabled = true;
             GetComponent<BallInteractions>().transform.SetParent(Pool.Instance.poolObjects[0].transform);
         }
+        else if (other.gameObject.CompareTag("DroppingCollider"))
+        {
+            _gameManager.DroppingBallsCounter();
+        }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
