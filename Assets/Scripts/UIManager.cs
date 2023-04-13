@@ -55,16 +55,15 @@ public class UIManager : MonoBehaviour
 
     public void ShowLevelPassedPanel()
     {
-        tapToStartPanel.SetActive(false);
+        
         levelPassedPanel.SetActive(true);
-        levelFailedPanel.SetActive(false);
+        Debug.Log("geçti");
     }
 
     public void ShowLevelFailedPanel()
     {
-        tapToStartPanel.SetActive(false);
-        levelPassedPanel.SetActive(false);
         levelFailedPanel.SetActive(true);
+        Debug.Log("geçemedi");
     }
 
     public void UpdateUI()

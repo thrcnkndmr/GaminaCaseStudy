@@ -74,15 +74,14 @@ public class GameManager : MonoSingleton<GameManager>
                 ballCount += 5;
                 levelPassCount += 5;
                 ballsInHole = 0;
-                levelManager.NextLevel();
                 PlayerPrefs.SetInt("Level", levelManager.currentLevel);
                 PlayerPrefs.SetInt("BallsCount", ballCount);
                 PlayerPrefs.SetInt("BallsNeededToPassLevel", levelPassCount);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                uiManager.ShowLevelPassedPanel();
             }
             else
             {
-                levelManager.RestartLevel();
+                uiManager.ShowLevelFailedPanel();
             }
         }
         

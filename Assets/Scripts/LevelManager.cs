@@ -18,20 +18,22 @@ public class LevelManager : MonoBehaviour
         LoadGame();
     }
 
-    public void NextLevel()
-    {
-        currentLevel++;
-    }
 
     public void LoadGame()
     {
         {
-            currentLevel = PlayerPrefs.GetInt("Level", 1); 
-            _gameManager.ballCount = PlayerPrefs.GetInt("BallsCount", 10); 
+            currentLevel = PlayerPrefs.GetInt("Level", 1);
+            _gameManager.ballCount = PlayerPrefs.GetInt("BallsCount", 10);
             _gameManager.levelPassCount = PlayerPrefs.GetInt("BallsNeededToPassLevel", 5);
         }
     }
 
+
+    public void NextLevel()
+    {
+        currentLevel++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void RestartLevel()
     {
