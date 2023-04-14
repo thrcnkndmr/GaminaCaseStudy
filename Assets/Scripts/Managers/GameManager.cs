@@ -10,13 +10,12 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private AdManager adManager;
     private TouchManager _touchManager;
     public LevelManager levelManager;
-    
 
-    [Header("Other")]
-    [SerializeField] private EnvironmentRandomizer environmentRandomizer;
+
+    [Header("Other")] [SerializeField] private EnvironmentRandomizer environmentRandomizer;
     [SerializeField] private GameObject currentMaze;
     [SerializeField] private Transform mazeSpawn;
-    
+
     public bool isGameNotStarted = true;
     public int levelPassCount;
     public int ballCount;
@@ -49,26 +48,27 @@ public class GameManager : MonoSingleton<GameManager>
 
         isGameNotStarted = false;
     }
-    
+
     private void Start()
     {
         GetRandomEnvironment();
     }
-    
-    
+
+
     public void GetRandomEnvironment()
     {
         var randomMaze = environmentRandomizer.Maze;
         currentMaze = randomMaze[Random.Range(0, randomMaze.Count)];
-        Instantiate(currentMaze, mazeSpawn.position, Quaternion.identity,mazeSpawn);
+        Instantiate(currentMaze, mazeSpawn.position, Quaternion.identity, mazeSpawn);
     }
 
     public void UpdateLevelRequirements()
     {
         int levelIndex = PlayerPrefs.GetInt("Level", 1);
-        ballCount = 5+(5 * levelIndex);
+        ballCount = 5 + (5 * levelIndex);
         levelPassCount = 5 + (5 * (levelIndex - 1));
     }
+
     public void DroppingBallsCounter()
     {
         droppingBallsAmount++;
@@ -80,19 +80,18 @@ public class GameManager : MonoSingleton<GameManager>
         ballsInHole++;
         uiManager.UpdateUI();
 
-        if (droppingBallsAmount == ballCount)
+        // if (droppingBallsAmount == ballCount)
         {
             if (ballsInHole >= levelPassCount)
             {
                 adManager.ShowAd();
                 uiManager.ShowLevelPassedPanel();
             }
-            else
+            else if (droppingBallsAmount == ballCount)
             {
                 adManager.ShowAd();
                 uiManager.ShowLevelFailedPanel();
             }
         }
-        
     }
 }
